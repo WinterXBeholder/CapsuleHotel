@@ -1,0 +1,38 @@
+My plan overall is to have one main method that loops over the menu options.
+Then every menu option will be a separate method which gets called.
+I also intend to create extra methods for repetitious activities (such as input validation)
+and a CONSTANTS file to pull in string values which may be repeated, rephrases, or translated in the future.
+
+plan.jpg is my flow diagram representing app function.
+
+Steps:
+0. Bring in console input methods I've created in past projects to reuse here as input validation loops
+1. create the main method with a Do While(!exit) Loop
+2. create the CONSTANTS file whose strings will be based on the menu inspiration provided
+    2.5 learn how to import those strings
+3. Add a switch in the Do While Loop based on int menu options
+4. create a method for printing the main menu (abstracting because it looks messy)
+5. create a room init method to isolate startup code (this would likely be upgraded in a future revision)
+6. create the checkIn method to isolate adding to the array, related text, and handling occupied rooms
+7. create the checkOut method (almost identical to checkIn, but opposite logic)
+8. Create the view method to isolate code that prints the rooms horizontally to the screen (generic enough to reuse)
+9. update case 3 to handle messages, since it's short and view is generic
+10. create exit method to abstract shut down code and messages
+
+Realizing this is more complex than I pictured:
+1. input validation loops weren't quite generic enough so modify
+2. View method is messy with unique input validation... Abstract print code to a separate method from logical code
+3. realizing that if hotel is empty or full, CheckIn and checkOut become infinite loops. Add getHotelStatus to dodge
+    3.5 make hotel status generic enough to also inform the manager how full we are regardless of errors
+4. debugging logical errors in view method (this is why we methodize)
+5. debugging formatted string mistakes
+
+dependancies:
+ - many methods depend on having my input methods imported, but this took no time at all
+ - main method only depends on menu and init methods. Each other can be slotted in individually seamlessly
+ - view() depends on printHorizontal(). if I make it generic enough, then checkIn() and checkOut() will depend on view
+ - checkIn() and checkOut() depend on getHotelStatus() in order to avoid infinite loops
+ - all console printing requires CONSTANTS file to be completed
+
+
+ Project is complete! I started around 1:00pm and ended around 6:00pm and I wrote 298 lines of code
