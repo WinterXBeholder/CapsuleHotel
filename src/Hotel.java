@@ -9,32 +9,31 @@ public class Hotel {
         boolean exit = false;
 
         do {
-            exit = false;
-            String input;
+
             printMenu();
-            input = Integer.toString(Input.getInt(console, 1, 4));
+            int input = Input.getInt(console, 1, 4);
 
             switch (input) {
-                case "1":
+                case 1:
                     if (getHotelStatus(capsules) == "full") {
                         System.out.printf(Const.F.ERROR, Const.S.FULL);
                         break;
                     }
                     checkIn(console, capsules);
                     break;
-                case "2":
+                case 2:
                     if (getHotelStatus(capsules) == "empty") {
                         System.out.printf(Const.F.ERROR, Const.S.EMPTY);
                         break;
                     }
                     checkOut(console, capsules);
                     break;
-                case "3":
+                case 3:
                     System.out.printf(Const.F.CAPSULE_INPUT, capsules.length);
                     int capsule = Input.getInt(console,1,capsules.length);
                     view(console, capsules, capsule-1);
                     break;
-                case "4":
+                case 4:
                     exit = exitMenu(console);
                     break;
                 default:
@@ -78,7 +77,7 @@ public class Hotel {
      */
     public static String getHotelStatus(String[] capsules) {
         int count = 0;
-        String status = "good";
+        String status = "";
         for (int i = 0; i < capsules.length; i++) {
             if (capsules[i] != null) { count += 1;}
         }
@@ -156,13 +155,31 @@ public class Hotel {
     public static void view(Scanner console, String[] capsules, int index) {
         int right = capsules.length - 1 -index;
         if (capsules.length < 11) {
-            printHorizontal(capsules, 0, capsules.length-1);
+            printVertical(capsules, 0, capsules.length-1);
+            // printHorizontal(capsules, 0, capsules.length-1);
         } else if (index - 5 <= 0) {
-            printHorizontal(capsules, 0, 10);
+            printVertical(capsules, 0, 10);
+            // printHorizontal(capsules, 0, 10);
         } else if (right < 5) {
-            printHorizontal(capsules, capsules.length-11, capsules.length-1);
+            printVertical(capsules, capsules.length-11, capsules.length-1);
+            // printHorizontal(capsules, capsules.length-11, capsules.length-1);
         } else {
-            printHorizontal(capsules, index - 5, index + 5);
+            printVertical(capsules, index - 5, index + 5);
+            // printHorizontal(capsules, index - 5, index + 5);
+        }
+    }
+
+    /**
+     * Zero-indexing. Logs each index and name of the array on a new line.
+     * @param capsules array of names
+     * @param startIncluded first index to be printed to the console
+     * @param endIncluded last index to be printed to the console
+     */
+    public static void printVertical(String[] capsules,  int startIncluded, int endIncluded) {
+        System.out.println("Capsule | Guest Name");
+        System.out.println("======= | =========");
+        for (int i = startIncluded; i <= endIncluded; i++) {
+            System.out.printf("%7s | %s %n", i+1, capsules[i] == null ? "[unoccupied]" : capsules[i]);
         }
     }
 
@@ -224,7 +241,7 @@ public class Hotel {
         System.out.printf(Const.F.EXIT_MESSAGE);
         int input = Input.getInt(console, 1,2);
         boolean exit = input == 1;
-        if (exit) { System.out.println(Const.S.BYE);}
+        if (exit) {System.out.println(Const.S.BYE);}
         return exit;
     }
 
