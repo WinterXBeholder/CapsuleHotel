@@ -1,5 +1,6 @@
 public class Const {
     public static class F{
+        // TODO: Talk to Irena about dot notation and inheritance?
         public static final String WELCOME = "%s%nWelcome to Capsule Hotel Manager%n%s%n";
         public static final String READY_CAPSULES = "There are %s unoccupied capsules ready to be booked%n";
         public static final String CHOOSE_OPTION = "Choose an option [%s-%s]:%n";

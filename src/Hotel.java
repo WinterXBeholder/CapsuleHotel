@@ -44,6 +44,9 @@ public class Hotel {
         } while (!exit);
     }
 
+    /**
+     * printMenu contains a series of System.out.printf and println using the Consts class to populate.
+     */
     public static void printMenu() {
         System.out.printf( "%n%s%n%s%n%s%n", "=".repeat(Const.S.MENU.length()), Const.S.MENU, "=".repeat(Const.S.MENU.length()));
         System.out.println("1. "+Const.S.CHECK_IN);
@@ -53,6 +56,13 @@ public class Hotel {
         System.out.printf(Const.F.CHOOSE_OPTION, 1, 4);
     }
 
+    /**
+     * roomInit contains array building prompts and returns a length after input validation.
+     * Does not build the array.
+     * @param console
+     * @return integer to be used as array length
+     *
+     */
     public static int roomInit(Scanner console) {
         System.out.printf("%n%n%s%n", String.format(Const.F.WELCOME,"=".repeat(Const.F.WELCOME.length()), "=".repeat(Const.F.WELCOME.length())));
         System.out.print(Const.S.CAPSULE_REQUEST);
@@ -61,6 +71,12 @@ public class Hotel {
         return input;
     }
 
+    /**
+     * getHotelStatus counts an array length. Always outputs a message
+     * from Consts class saying how full.
+     * @param capsules array of names
+     * @return string "good", "full", or "empty"
+     */
     public static String getHotelStatus(String[] capsules) {
         int count = 0;
         String status = "good";
@@ -76,6 +92,13 @@ public class Hotel {
         return status;
     }
 
+    /**
+     * checkIn validates console inputs to add a name to capsules array. Uses Consts class messages. Uses view method
+     * after user inputs a room number to show them who is in it and neighboring rooms. Re-prompts if room value is not
+     * null.
+     * @param console
+     * @param capsules array of names
+     */
     public static void checkIn(Scanner console, String[] capsules) {
         System.out.printf("%n%s%n%s%n%s%n", "=".repeat(Const.S.CHECK_IN.length()), Const.S.CHECK_IN, "=".repeat(Const.S.CHECK_IN.length()));
         System.out.printf("%s: ", Const.S.GUEST_NAME);
@@ -97,6 +120,13 @@ public class Hotel {
         } while (occupied);
     }
 
+    /**
+     * checkOut validates console inputs to replace a name in capsules array with null. Uses Consts class messages.
+     * Uses view method after user inputs a room number to show them who is in it and neighboring rooms. Re-prompts if
+     * room value is already null.
+     * @param console
+     * @param capsules array of names
+     */
     public static void checkOut(Scanner console, String[] capsules) {
         System.out.printf("%n%s%n%s%n%s%n", "=".repeat(Const.S.CHECK_OUT.length()), Const.S.CHECK_OUT, "=".repeat(Const.S.CHECK_OUT.length()));
         int capsule;
@@ -116,6 +146,14 @@ public class Hotel {
         } while (!occupied);
     }
 
+    /**
+     * Zero-indexing. view picks a range of index-5 -> index+5, or the bottom 11 or the top 11 indexes of the capsules
+     * array. It calls printHorizontal using the start and end indexes it picked. If capsules.length < 11 then .length-1
+     * is the end index.
+     * @param console
+     * @param capsules array of names
+     * @param index The view center. index-5 to index+5 will be printed.
+     */
     public static void view(Scanner console, String[] capsules, int index) {
         int right = capsules.length - 1 -index;
         if (capsules.length < 11) {
@@ -129,6 +167,15 @@ public class Hotel {
         }
     }
 
+    // TODO: Talk to Irina about optimization of print out
+
+    /**
+     * Zero-indexing. Arranges array values and indexes into two horizontal format strings and logs them to the console
+     * on two lines.
+     * @param capsules array of names
+     * @param startIncluded first index to be printed to the console
+     * @param endIncluded last index to be printed to the console
+     */
     public static void printHorizontal(String[] capsules, int startIncluded, int endIncluded) {
         String rooms = Const.S.CAPSULE+"->| %-20s | %-20s | %-20s | %-20s |  %-20s |  %-20s |  %-20s |  %-20s |  %-20s |  %-20s |  %-20s |%n";
         String names = Const.S.GUEST+"  ->| %-20s | %-20s | %-20s | %-20s |  %-20s |  %-20s |  %-20s |  %-20s |  %-20s |  %-20s |  %-20s |%n";
@@ -168,6 +215,12 @@ public class Hotel {
         System.out.printf(rooms + names);
     }
 
+    /**
+     * exitMenu verifies via console that the user would indeed like to exit the application, and returns true if so.
+     * Uses Consts class to populate menu.
+     * @param console
+     * @return boolean true if the user wants to exit. False otherwise.
+     */
     public static boolean exitMenu(Scanner console) {
         System.out.printf(Const.F.EXIT_MESSAGE);
         int input = Input.getInt(console, 1,2);
