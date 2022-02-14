@@ -61,7 +61,6 @@ public class Hotel {
      * Does not build the array.
      * @param console
      * @return integer to be used as array length
-     *
      */
     public static int roomInit(Scanner console) {
         System.out.printf("%n%n%s%n", String.format(Const.F.WELCOME,"=".repeat(Const.F.WELCOME.length()), "=".repeat(Const.F.WELCOME.length())));
